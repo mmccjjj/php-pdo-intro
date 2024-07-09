@@ -1,0 +1,10 @@
+body {
+  background-color: aquamarine;
+  color: darkslategray;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
