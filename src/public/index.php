@@ -14,8 +14,41 @@
 
 <body>
     <?php
+    $db_host = getenv("DB_HOST");
+    $db_name = getenv("DB_NAME");
+    $db_user = getenv("DB_USER");
+    $db_pass = getenv("DB_PASSWORD");
+    
+    
 
+        $dbConnection = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
 
+    
+
+    $query= "SELECT * FROM users";
+    $statement= $dbConnection->query($query);
+    $rows= $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    /* print_r($rows); */
+
+    $username = "jdoe";
+
+    /* $query = "SELECT * FROM users WHERE email LIKE :username";
+
+    $statement = $dbConnection->prepare($query);
+    $statement->bindParam(':username', $username);
+
+    $statement->execute();
+   
+
+    $result= $statement->fetchAll(PDO::FETCH_ASSOC);
+    print_r($result); */
+
+/*     $statement = $dbConnection->prepare("SELECT * FROM users WHERE username = ? and email = ?");
+    $statement->execute([$username, "jdoe@example.com"]);
+    $result= $statement->fetchAll(PDO::FETCH_ASSOC);
+    print_r($result); */
+    /* print_r($rows); */
     //phpinfo(); 
 
     // echo get_include_path(); 
@@ -23,6 +56,21 @@
     // echo "<h1>Hello, we are starting to work with Databases and PHP PDO!</h1>";
 
     // include_once dirname(__DIR__) . '/utils/db.php';
+
+
+    echo
+    "<table>
+        <tbody>";
+
+        foreach ($rows as $user){
+            echo "<tr>";
+                echo "<td>" . $user['id'] . "<tr>";
+                echo "<td>" . $user['username'] . "<tr>";
+                echo "<td>" . $user['email'] . "<tr>";
+            echo "<tr>";
+        }
+    echo "</tbody>
+    </table>";
 
 
 
